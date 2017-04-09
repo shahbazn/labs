@@ -1,12 +1,12 @@
 import os
-import flaskr
+import tgc
 import unittest
 
 class APITestCase(unittest.TestCase):
 
     def setUp(self):
-        flaskr.app.config['TESTING'] = True
-        self.app = flaskr.app.test_client()
+        tgc.app.config['TESTING'] = True
+        self.app = tgc.app.test_client()
 
     def tearDown(self):
         pass
