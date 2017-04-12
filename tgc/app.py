@@ -1,10 +1,13 @@
 from flask import Flask
 from flask import request
+
+import config
 import logging
 
 app = Flask(__name__)
-log = logging.getLogger(__name__)
-
+app.config.from_object(config)
+LOG = logging.getLogger('tgc')
+#LOG.basicConfig(format=app.config['LOG_FORMAT'], datefmt='%Y-%m-%d %H:%M:%S')
 
 @app.route('/calculate')
 def calculate():
@@ -14,6 +17,6 @@ def calculate():
         return str(result)
     except ZeroDivisionError:
         return "undefined"
-    except Exception as e:
-        log.error(str(e))
+    except Exception as exc:
+        LOG.exception(exc)
         return "invalid input"

@@ -1,0 +1,10 @@
+---
+
+- name: Prepare sandox environment for deployment
+  hosts: localhost
+  become: True
+  gather_facts: True
+  vars:
+    base_dir: "{{ playbook_dir }}/../.."
+  roles:
+    - role: tgcapp
