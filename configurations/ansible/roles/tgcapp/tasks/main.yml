@@ -7,7 +7,7 @@
 - name: create application user
   user:
     name: "{{ tgcapp_user }}"
-    createhome: no
+    createhome: yes
     password: "{{ tgcapp_user_password }}"
     group: "{{ tgcapp_user_group }}"
     groups: "{{ tgcapp_user_groups  }}"
@@ -42,7 +42,7 @@
 - name: Place docker compose file
   copy:
     src: "{{ docker_compose_file_path }}"
-    dest: "{{ tgcapp_base_dir }}"
+    dest: "/home/{{ tgcapp_user }}"
     owner: "{{ tgcapp_user }}"
     group: "{{ tgcapp_user_group }}"
     mode: 0755

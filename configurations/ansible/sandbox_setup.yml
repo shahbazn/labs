@@ -8,3 +8,5 @@
     base_dir: "{{ playbook_dir }}/../.."
   roles:
     - role: tgcapp
+
+- include: install_docker.yml

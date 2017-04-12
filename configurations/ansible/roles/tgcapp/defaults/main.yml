@@ -13,4 +13,4 @@ tgcapp_user_groups: "{{ tgcapp_user_group }},sudo"
 tgcapp_base_dir: /tgc
 tgcapp_app_dir: "{{ tgcapp_base_dir }}/app/tgc"
 tgcapp_log_dir: "{{ tgcapp_base_dir }}/var/log/tgc"
-docker_compose_file_path: "{{ base_dir }}/configurations/tgc-deploy.yml"
+docker_compose_file_path: "{{ base_dir }}/configurations/docker-compose.yml"
