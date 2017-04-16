@@ -6,7 +6,8 @@ MAINTAINER Shahbaz Nazir "shahbaznazir1992@gmail.com"
 # advantage of the caching.
 COPY tgc/ /tgc/
 COPY setup.py /
-RUN pip install -r /tgc/requirements.txt
+COPY requirements.txt /
+RUN pip install -r /requirements.txt
 RUN python setup.py install
 
 EXPOSE 8000

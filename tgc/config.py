@@ -1,2 +1,2 @@
 DEBUG = True # Turns on debugging features in Flask
-LOG_FILE = "/tgcapp/logs/tgc.log"
+LOG_FILE = "/tgc/logs/tgc.log"
