@@ -53,4 +53,4 @@
     dest: "{{ tgcapp_base_dir }}"
     owner: "{{ tgcapp_user }}"
     group: "{{ tgcapp_user_group }}"
-    mode: 075
+    mode: 0755

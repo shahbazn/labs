@@ -24,9 +24,5 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
 
-    entry_points={
-        'console_scripts': [
-            'test_tgc=tests.test_api:main',
-        ],
-    },
+    packages = ['tgc'],
 )
