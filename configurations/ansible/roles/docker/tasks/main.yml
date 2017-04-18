@@ -28,7 +28,7 @@
 
 - name: user is added to the docker group
   user:
-    name: {{ user }}
+    name: "{{ user }}"
     group: docker
   register: user_result
   tags: [docker]
@@ -37,16 +37,5 @@
   service:
     name: docker
     state: restarted
-  when: copy_result|changed or user_result|changed
-  tags: [docker]
-
-- name: DockerUI is running
-  docker:
-    image: uifd/ui-for-docker
-    name: dockerui
-    ports: 9000:9000
-    privileged: yes
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-  when: not skip_ui is defined
+  when: user_result|changed
   tags: [docker]

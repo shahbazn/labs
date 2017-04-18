@@ -1,4 +1,6 @@
 logs_dir: /data/consul/logs
+ip: "{{ facter_ipaddress_eth1 }}"
+consul_extra: ""
 
 directories:
   - /data/consul/data
