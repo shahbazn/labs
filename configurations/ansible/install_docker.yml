@@ -1,7 +1,0 @@
-- hosts: localhost
-  vars:
-    - install_docker: true
-    - install_docker_compose: true
-    - ansible_docker_user: ubuntu
-  roles:
-     - docker

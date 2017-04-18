@@ -4,7 +4,7 @@ set -e
 
 if [ "$TEST_TYPE" = "integ" ]
 then
-  if curl http://server/calculate?x=1 | grep -q 'undefined'; then
+  if curl http://web/calculate?x=1 | grep -q 'undefined'; then
     echo "Tests passed!"
     exit 0
   else

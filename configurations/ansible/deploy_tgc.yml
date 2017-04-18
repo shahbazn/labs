@@ -1,0 +1,10 @@
+- hosts: localhost
+  roles:
+    - common
+    - docker
+    - docker-compose
+    - consul
+    - registrator
+    - consul-template
+    - nginx
+    - service

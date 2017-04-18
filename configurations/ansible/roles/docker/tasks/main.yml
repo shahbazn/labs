@@ -1,13 +1,52 @@
----
+- name: Debian add Docker repository and update apt cache
+  apt_repository:
+    repo: deb https://apt.dockerproject.org/repo ubuntu-trusty main
+    update_cache: yes
+    state: present
+  tags: [docker]
 
-- name: Install Baseline
-  include: docker_baseline.yml
-  when: install_docker is defined
+- name: Debian Docker is present
+  apt:
+    name: docker-engine
+    state: latest
+    force: yes
+  tags: [docker]
 
-- name: Install Docker
-  include: docker.yml
-  when: install_docker is defined
+- name: Debian python-pip is present
+  apt:
+    name: python-pip
+    state: present
+    force: yes
+  tags: [docker]
 
-- name: Install Docker Compose
-  include: docker_compose.yml
-  when: install_docker_compose is defined
+- name: Debian docker-py is present
+  pip:
+    name: docker-py
+    version: 1.6.0
+    state: present
+  tags: [docker]
+
+- name: user is added to the docker group
+  user:
+    name: {{ user }}
+    group: docker
+  register: user_result
+  tags: [docker]
+
+- name: Debian Docker service is restarted
+  service:
+    name: docker
+    state: restarted
+  when: copy_result|changed or user_result|changed
+  tags: [docker]
+
+- name: DockerUI is running
+  docker:
+    image: uifd/ui-for-docker
+    name: dockerui
+    ports: 9000:9000
+    privileged: yes
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  when: not skip_ui is defined
+  tags: [docker]

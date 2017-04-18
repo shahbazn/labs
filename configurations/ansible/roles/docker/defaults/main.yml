@@ -1,4 +1,0 @@
----
-
-ansible_docker_paths_docker: /usr/bin/docker
-ansible_docker_paths_docker_compose: /usr/bin/docker-compose

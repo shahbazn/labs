@@ -1,0 +1,8 @@
+web:
+  restart: always
+  image: shahbazn/shahbazn-tgc
+  volumes:
+    - /tgc/logs:/tgc/logs
+  expose:
+    - "8080"
+  command: gunicorn tgc:app -b :8080 --name app --log-level=debug --log-file=-
