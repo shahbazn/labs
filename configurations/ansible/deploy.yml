@@ -6,3 +6,4 @@
     - registrator
     - consul-template
     - nginx
+    - service
