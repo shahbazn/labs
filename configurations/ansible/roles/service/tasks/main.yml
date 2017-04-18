@@ -18,6 +18,13 @@
 #    chdir: /data/{{ service_name }}
 #  tags: [service]
 
+- name: Set service scale
+  shell: docker-compose scale \
+    {{ service_name }}=3
+  args:
+    chdir: /data/{{ service_name }}
+  tags: [service]
+
 - name: Containers are running
   shell: docker-compose up -d \
     --force-recreate \
