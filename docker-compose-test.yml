@@ -1,13 +1,16 @@
 app:
   restart: always
   image: shahbazn/shahbazn-tgc
-  expose:
+  environment:
+    - SERVICE_NAME=tgc
+  ports:
     - "8080"
-  command: gunicorn tgc:app -b :8080 --name app --log-level=debug --log-file=/tgc/logs/tgc.log
+  command: gunicorn tgc:app -b :8080 --name app --log-level=debug --log-file=-
 
-test:
-  links:
-    - nginx:web
-  image: shahbazn/shahbazn-tgc:0.1.3-test
+integ:
+  image: shahbazn/shahbazn-tgc:test
   environment: 
     TEST_TYPE: integ 
+
+test:
+  image: shahbazn/shahbazn-tgc:test
