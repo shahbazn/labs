@@ -1,0 +1,5 @@
+upstream tgc {
+    {{range service "tgc" "any"}}
+    server {{.Address}}:{{.Port}};
+    {{end}}
+}

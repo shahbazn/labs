@@ -1,0 +1,41 @@
+- name: Directory is created
+  file:
+    path: /data/{{ service_name }}
+    recurse: yes
+    state: directory
+  tags: [service]
+
+- name: Files are copied
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ files }}"
+  tags: [service]
+
+- name: Containers are pulled
+  shell: docker-compose pull "{{ service_name }}"
+  args:
+    chdir: /data/{{ service_name }}
+  tags: [service]
+
+- name: Set service scale
+  shell: docker-compose scale \
+    {{ service_name }}=3
+  args:
+    chdir: /data/{{ service_name }}
+  tags: [service]
+
+- name: Containers are running
+  shell: docker-compose up -d \
+    --force-recreate \
+    {{ service_name }}
+  args:
+    chdir: /data/{{ service_name }}
+  tags: [service]
+
+- name: Proxy is configured
+  shell: consul-template \
+    -consul {{ ip }}:8500 \
+    -template "{{ ct_src }}:{{ ct_dest }}:{{ ct_cmd }}" \
+    -once
+  tags: [service]
